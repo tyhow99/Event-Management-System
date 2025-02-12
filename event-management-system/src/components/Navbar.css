@@ -1,0 +1,41 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 60px; /* Define a height for the navbar */
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center;
+    background-color: #37abf9;
+    color: white;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar-left {
+    position: absolute;
+    left: 10px;
+}
+
+.navbar-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensure the links container takes full height */
+}
+
+.navbar-links a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 0 15px;
+}
+
+.navbar-links a:hover {
+    text-decoration: underline;
+}
