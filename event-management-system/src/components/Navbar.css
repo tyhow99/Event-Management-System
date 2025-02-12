@@ -15,6 +15,10 @@
     z-index: 1000;
 }
 
+.navbar-logo {
+    height: 40px; /* Adjust the height as needed */
+}
+
 .navbar-left {
     position: absolute;
     left: 10px;

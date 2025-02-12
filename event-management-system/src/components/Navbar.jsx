@@ -5,7 +5,7 @@ function Navbar(){
     return (
         <div className="navbar">
             <div className="navbar-left">
-                <p>p</p>
+                <img src="Logo.png" alt="Logo" className="navbar-logo" />
             </div>
             <div className="navbar-links">
                 <a href="#link1">Event Schedule</a>
