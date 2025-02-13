@@ -1,0 +1,10 @@
+.event-container{
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+}
+
+.grid-container{
+    position: relative;
+    justify-content: center;
+}
