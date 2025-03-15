@@ -1,35 +1,26 @@
-const express = require('express')
-const cors = require('cors')
-const pool = require('./db')
-const app = express()
+const express = require('express');
+const app = express();
+const cors = require("cors");
+const pool = require("./db")
 const port = 5000
 
-app.use(cors())
-app.use(express())
+//middleware
+app.use(cors());
+app.use(express.json());//gives access to req.body
 
-//create an event
-app.post('/Event_Schedule', async (req, res) =>{
+//create an employee
+app.post("/employee_information", async(res,req) =>{
     try {
-        console.log(req.body)
-    } catch (error) {
-        console.error(error.message)
+        console.log(res.body)
+        const {full_name, phone_number, email, dob, job} = res.body;
+        const newEmployee = await pool.query("INSERT INTO employee_information (full_name, phone_number,email,dob,job) VALUES($1,$2,$3,$4,$5)",
+            [full_name,phone_number,email,dob,job]);
+    } catch (err) {
+        console.log("error");
+        console.error(err.message);
     }
-})
+});
 
-//create an event
-app.post('/Vendor_Information', async (req, res) =>{
-    try {
-        console.log(req.body)
-    } catch (error) {
-        console.error(error.message)
-    }
-})
-
-
-
-app.get('/', (req, res) => {
-  res.status(200).send('Hello World!');
-})
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)

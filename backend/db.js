@@ -8,4 +8,4 @@ const pool = new Pool({
     database: "event_management"
 });
 
-modules.export = pool;
+module.exports = pool;
