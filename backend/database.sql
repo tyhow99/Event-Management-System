@@ -32,9 +32,9 @@ CREATE TABLE employee_information (
 -- Creating the Worker_Schedule table
 -- On delete cascade deletes all references to other tables
 CREATE TABLE worker_schedule (
-    worker_id INT NOT NULL REFERENCES Employee_Information(worker_id) ON DELETE CASCADE,
-    vendor_id INT NOT NULL REFERENCES Vendor_Information(vendor_id) ON DELETE CASCADE,
-    event_id INT NOT NULL REFERENCES Event_Schedule(event_id) ON DELETE CASCADE,
+    worker_id INT NOT NULL REFERENCES employee_information(worker_id) ON DELETE CASCADE,
+    vendor_id INT NOT NULL REFERENCES vendor_information(vendor_id) ON DELETE CASCADE,
+    event_id INT NOT NULL REFERENCES event_schedule(event_id) ON DELETE CASCADE,
     pay_rate NUMERIC(10, 2) NOT NULL,
     worker_start TIME NOT NULL,
     worker_end TIME NOT NULL,
