@@ -1,45 +1,50 @@
+/* Navbar styles */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    width: 100%;
-    height: 60px; /* Define a height for the navbar */
+    width: 97%;
     display: flex;
-    justify-content: center; /* Center the content horizontally */
+    justify-content: space-between;
     align-items: center;
-    background-color: #37abf9;
+    padding: 1rem 2rem;
+    background-color: #37abf9; /* Deep blue color from the image */
     color: white;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000; /* Ensures navbar stays above other content */
+  }
 
-.navbar-logo {
-    height: 40px; /* Adjust the height as needed */
-}
-
-.navbar-left {
-    position: absolute;
-    left: 10px;
-}
-
-.navbar-links {
+  .nav-links {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Ensure the links container takes full height */
-}
+    gap: 1.5rem;
+  }
 
-.navbar-links a {
-    position: relative;
-    display: flex;
-    align-items: center;
+  .nav-links a {
     color: white;
     text-decoration: none;
-    padding: 0 15px;
-}
+    font-weight: 500;
+    font-size: 1rem;
+    transition: opacity 0.3s;
+    padding: 0.5rem 0;
+  }
 
-.navbar-links a:hover {
-    text-decoration: underline;
-}
+  .nav-links a:hover {
+    opacity: 0.8;
+    border-bottom: 2px solid white;
+  }
+
+  .logout-btn {
+    background-color: #d32f2f; /* Red color for contrast */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+  }
+
+  .logout-btn:hover {
+    background-color: #b71c1c;
+  }

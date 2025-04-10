@@ -1,31 +1,40 @@
-
 import './LoginPage.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
   const [workerId, setWorkerId] = useState('');
-  const [password, setPassword] = useState('');
-  const [data, setData] = useState(null);
+  const [loginStatus, setLoginStatus] = useState(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Add logic to handle login, e.g., sending a request to your backend
-    console.log('Login attempt with:', workerId, password);
-  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/worker_schedule');
-        setData(response.data);
-        console.log('Fetched data:', response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+    const idNumber = parseInt(workerId, 10);
+    if (isNaN(idNumber)) {
+      setLoginStatus('error');
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `http://localhost:5001/employee_information/${idNumber}`
+      );
+
+      if (response.data) {
+        setLoginStatus('success');
+        localStorage.setItem('workerId', workerId);
+        setIsAuthenticated(true);
+        navigate('/home');
+      } else {
+        setLoginStatus('error');
       }
-    };
-    fetchData();
-  }, []);
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginStatus('error');
+    }
+  };
 
   return (
     <div className="login-container">
@@ -33,21 +42,22 @@ const Login = () => {
       <form onSubmit={handleLogin}>
         <label htmlFor="workerId">Worker ID:</label>
         <input
-          type="text"
+          type="number"
           id="workerId"
           value={workerId}
           onChange={(e) => setWorkerId(e.target.value)}
-          placeholder="Worker ID"
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
+          placeholder="Enter your Worker ID"
+          required
         />
         <button type="submit">Login</button>
+
+        {loginStatus === 'success' && (
+          <div className="success-message">Login successful! Redirecting...</div>
+        )}
+
+        {loginStatus === 'error' && (
+          <div className="error-message">Invalid worker ID ❌</div>
+        )}
       </form>
     </div>
   );

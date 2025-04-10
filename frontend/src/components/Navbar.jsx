@@ -1,20 +1,24 @@
 import './Navbar.css'
+import { Link } from 'react-router-dom';
 
+const Navbar = ({ setIsAuthenticated }) => {
+  const handleLogout = () => {
+    localStorage.removeItem('workerId');
+    setIsAuthenticated(false);
+  };
 
-function Navbar(){
-    return (
-        <div className="navbar">
-            <div className="navbar-left">
-                <img src="Logo.png" alt="Logo" className="navbar-logo" />
-            </div>
-            <div className="navbar-links">
-                <a href="/EventSchedule">Event Schedule</a>
-                <a href="/WorkerSchedule">Worker Schedule</a>
-                <a href="/VendorInformation">Vendor Information</a>
-                <a href="/WorkerInformation">Worker Information</a>
-            </div>
-        </div>
-    );
+  return (
+    <nav className="navbar">
+      <div className="nav-links">
+        <Link to="/home">Home</Link>
+        <Link to="/WorkerInformation">Worker Information</Link>
+        <Link to="/WorkerSchedule">Worker Schedule</Link>
+        <Link to="/VendorInformation">Vendor Information</Link>
+        <Link to="/EventSchedule">Event Schedule</Link>
+      </div>
+      <button className="logout-btn" onClick={handleLogout}>Logout</button>
+    </nav>
+  );
 };
 
 export default Navbar;

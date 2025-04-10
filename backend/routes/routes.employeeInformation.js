@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const pool = require("../db"); // Update the path based on your directory structure
+const pool = require("../db.js"); // Update the path based on your directory structure
 
 // Create an employee
 router.post("/", async (req, res) => {

@@ -1,33 +1,33 @@
-
 import './Homepage.css';
+import { Link } from 'react-router-dom';
 
 function Homepage() {
     return (
         <div className="homepage">
             <div className="content">
                 <div className="box">
-                    <a href="/EventSchedule">
+                    <Link to="/EventSchedule" className="box-content">
                         <h2>Event Schedule</h2>
                         <p>View and manage the schedule for all upcoming events.</p>
-                    </a>
+                    </Link>
                 </div>
                 <div className="box">
-                    <a href="/WorkerSchedule">
+                    <Link to="/WorkerSchedule" className="box-content">
                         <h2>Worker Schedule</h2>
                         <p>Check and update the work schedule for all staff members.</p>
-                    </a>
+                    </Link>
                 </div>
                 <div className="box">
-                    <a href="/VendorInformation">
+                    <Link to="/VendorInformation" className="box-content">
                         <h2>Vendor Information</h2>
                         <p>Access and manage information about all vendors.</p>
-                    </a>
+                    </Link>
                 </div>
                 <div className="box">
-                    <a href="/WorkerInformation">
+                    <Link to="/WorkerInformation" className="box-content">
                         <h2>Worker Information</h2>
                         <p>View and edit details about all workers involved in the events.</p>
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>
