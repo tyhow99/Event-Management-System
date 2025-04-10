@@ -17,8 +17,9 @@ const Login = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5001/worker_schedule');
+        const response = await axios.get('/worker_schedule');
         setData(response.data);
+        console.log('Fetched data:', response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
