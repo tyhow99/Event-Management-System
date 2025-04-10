@@ -1,6 +1,8 @@
 import './LoginPage.css';
 import { useState } from 'react';
 import axios from 'axios';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setIsAuthenticated }) => {
@@ -37,6 +39,8 @@ const Login = ({ setIsAuthenticated }) => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
@@ -47,8 +51,7 @@ const Login = ({ setIsAuthenticated }) => {
           value={workerId}
           onChange={(e) => setWorkerId(e.target.value)}
           placeholder="Enter your Worker ID"
-          required
-        />
+          required />
         <button type="submit">Login</button>
 
         {loginStatus === 'success' && (
@@ -60,6 +63,7 @@ const Login = ({ setIsAuthenticated }) => {
         )}
       </form>
     </div>
+    <Footer /></>
   );
 };
 
