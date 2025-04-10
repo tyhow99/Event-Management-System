@@ -1,16 +1,30 @@
 
 import './LoginPage.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
   const [workerId, setWorkerId] = useState('');
   const [password, setPassword] = useState('');
+  const [data, setData] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     // Add logic to handle login, e.g., sending a request to your backend
     console.log('Login attempt with:', workerId, password);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5001/worker_schedule');
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="login-container">
