@@ -1,8 +1,6 @@
 import './LoginPage.css';
 import { useState } from 'react';
 import axios from 'axios';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setIsAuthenticated }) => {
@@ -25,10 +23,16 @@ const Login = ({ setIsAuthenticated }) => {
       );
 
       if (response.data) {
-        setLoginStatus('success');
-        localStorage.setItem('workerId', workerId);
-        setIsAuthenticated(true);
-        navigate('/home');
+        // Check if the user is a manager
+        if (response.data.job.toLowerCase() === 'manager') {
+          setLoginStatus('success');
+          localStorage.setItem('workerId', workerId);
+          localStorage.setItem('isManager', 'true');
+          setIsAuthenticated(true);
+          navigate('/home');
+        } else {
+          setLoginStatus('not_manager');
+        }
       } else {
         setLoginStatus('error');
       }
@@ -39,19 +43,18 @@ const Login = ({ setIsAuthenticated }) => {
   };
 
   return (
-    <>
-    <Navbar />
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        <label htmlFor="workerId">Worker ID:</label>
+        <label htmlFor="workerId">Manager ID:</label>
         <input
           type="number"
           id="workerId"
           value={workerId}
           onChange={(e) => setWorkerId(e.target.value)}
-          placeholder="Enter your Worker ID"
-          required />
+          placeholder="Enter your Manager ID"
+          required
+        />
         <button type="submit">Login</button>
 
         {loginStatus === 'success' && (
@@ -59,11 +62,14 @@ const Login = ({ setIsAuthenticated }) => {
         )}
 
         {loginStatus === 'error' && (
-          <div className="error-message">Invalid worker ID ❌</div>
+          <div className="error-message">Invalid manager ID ❌</div>
+        )}
+
+        {loginStatus === 'not_manager' && (
+          <div className="error-message">Access restricted to managers only ⚠️</div>
         )}
       </form>
     </div>
-    <Footer /></>
   );
 };
 
