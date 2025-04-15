@@ -40,5 +40,5 @@ CREATE TABLE worker_schedule (
     worker_start TIME NOT NULL,
     worker_end TIME NOT NULL,
     section VARCHAR(50),
-    PRIMARY KEY (worker_date)
+    PRIMARY KEY (schedule_date)
 );
