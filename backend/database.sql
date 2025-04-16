@@ -8,7 +8,7 @@ CREATE TABLE event_schedule (
     event_end TIME NOT NULL,
     event_date DATE NOT NULL,
     organizer VARCHAR(100)
-) START WITH 1000;
+);
 
 -- Creating the Vendor_Information table
 CREATE TABLE vendor_information (
@@ -17,7 +17,7 @@ CREATE TABLE vendor_information (
     vendor_type VARCHAR(50) NOT NULL,
     sections VARCHAR(100),
     manager_id INT REFERENCES employee_information(worker_id) ON DELETE CASCADE
-) START WITH 1000;
+);
 
 -- Creating the Employee_Information table
 CREATE TABLE employee_information (
@@ -27,7 +27,7 @@ CREATE TABLE employee_information (
     email VARCHAR(100),
     dob DATE NOT NULL,
     job VARCHAR(50) NOT NULL
-) START WITH 1000;
+);
 
 -- Creating the Worker_Schedule table
 -- On delete cascade deletes all references to other tables
