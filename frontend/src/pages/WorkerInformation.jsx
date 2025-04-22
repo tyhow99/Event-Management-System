@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const WorkerInformation = () => {
   const [workers, setWorkers] = useState([]);
@@ -68,6 +69,9 @@ const WorkerInformation = () => {
           Next
         </button>
       </div>
+      
+      <Link to="/AddWorker" className="btn add-worker-btn">Add Worker</Link>
+      
     </div>
   );
 };
