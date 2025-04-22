@@ -9,27 +9,27 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
 
-  .event-table {
+  .vendor-table {
     width: 100%;
     border-collapse: collapse;
     background: white;
   }
 
-  .event-table th,
-  .event-table td {
+  .vendor-table th,
+  .vendor-table td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
   }
 
-  .event-table th {
+  .vendor-table th {
     background-color: #1a237e;
     color: white;
     position: sticky;
     top: 0;
   }
 
-  .event-table tr:hover {
+  .vendor-table tr:hover {
     background-color: #f5f5f5;
   }
 
