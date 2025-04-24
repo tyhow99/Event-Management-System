@@ -72,7 +72,7 @@ const WorkerSchedule = () => {
           Next
         </button>
       </div>
-      <Link to="/AddWorker" className="btn add-worker-btn">Add Worker</Link>
+      <Link to="/AddWorkerSchedule" className="btn add-worker-btn">Add Worker Schedule</Link>
     </div>
   );
 };

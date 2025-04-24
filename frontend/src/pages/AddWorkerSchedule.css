@@ -1,18 +1,18 @@
-.worker-form {
+.worker-schedule-form {
     display: flex;
     flex-direction: column;
     width: 300px; 
     margin: 0 auto; 
   }
   
-  .worker-form input,
-  .worker-form button {
+  .worker-schedule-form input,
+  .worker-schedule-form button {
     margin-bottom: 15px; 
     padding: 10px;
     font-size: 16px;
   }
 
-  .worker-form button {
+  .worker-schedule-form button {
     background-color: #1a237e;
     color: white;
     border: none;

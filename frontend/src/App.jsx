@@ -8,6 +8,7 @@ import VendorInformation from './pages/VendorInformation';
 import EventSchedule from './pages/EventSchedule';
 import Login from './pages/LoginPage';
 import AddWorker from './pages/AddWorker';
+import AddWorkerSchedule from './pages/AddWorkerSchedule';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
@@ -61,6 +62,11 @@ function App() {
           
             <AddWorker />
          
+        } />
+        <Route path="/AddWorkerSchedule" element={
+          
+          <AddWorkerSchedule />
+       
         } />
       </Routes>
       {isAuthenticated && <Footer />}

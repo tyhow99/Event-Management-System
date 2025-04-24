@@ -5,9 +5,9 @@ const pool = require("../db"); // Update the path based on your directory struct
 // Create a Worker Schedule Entry
 router.post("/", async (req, res) => {
     try {
-        const { worker_id, vendor_id, event_id, pay_rate, worker_start, worker_end, section } = req.body;
+        const {vendor_id, event_id, pay_rate, worker_start, worker_end, section, schedule_date,  worker_id} = req.body;
         const newWorkerSchedule = await pool.query(
-            "INSERT INTO worker_schedule (worker_id, vendor_id, event_id, pay_rate, worker_start, worker_end, section) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+            "INSERT INTO worker_schedule (vendor_id, event_id, pay_rate, worker_start, worker_end, section, schedule_date, worker_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
             [worker_id, vendor_id, event_id, pay_rate, worker_start, worker_end, section]
         );
         res.json(newWorkerSchedule.rows[0]);
