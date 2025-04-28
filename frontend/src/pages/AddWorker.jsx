@@ -27,6 +27,7 @@ const AddWorker = () => {
             setErrorMessage(''); // Clear any previous errors
             setTimeout(() => setSuccessMessage(''), 3000); // Hide success message after 3 seconds
 
+            //Reset after sucessful submit 
             setFormData({
                 full_name: '',
                 phone_number: '',

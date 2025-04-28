@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import './AddWorkerSchedule.css';
 
@@ -7,12 +7,15 @@ const AddWorkerSchedule = () => {
         vendor_id: '',
         event_id: '',
         pay_rate: '',
-        start_time: '',
-        end_time: '',
+        worker_start: '',
+        worker_end: '',
         section: '',
         schedule_date: '',
         worker_id: '',
     });
+
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState(''); // New error message state
 
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value});
@@ -24,26 +27,33 @@ const AddWorkerSchedule = () => {
         try {
             const response = await axios.post('http://localhost:5001/worker_schedule', formData);
             console.log("Schedule added:", response.data);
+            setSuccessMessage("Schedule added successfully!");
+            setErrorMessage(''); // Clear any previous errors
+            setTimeout(() => setSuccessMessage(''), 3000); // Hide success message after 3 seconds
     
             //Reset after sucessful submit
             setFormData({
                 vendor_id: '',
                 event_id: '',
                 pay_rate: '',
-                start_time: '',
-                end_time: '',
+                worker_start: '',
+                worker_end: '',
                 section: '',
                 schedule_date: '',
                 worker_id: '',
             });
         } catch (error) {
             console.error("There was an error adding the worker schedule:", error);
+            setErrorMessage("Failed to add worker schedule. Please try again.");
+            setSuccessMessage(''); // Clear any success message
         }
     };
 
     return (
         <div className="container">
             <h1>Add New Worker Schedule</h1>
+            {successMessage && <p className="success-message">{successMessage}</p>}
+            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
             <div className="form-container">
                 <form onSubmit={handleSubmit} className="worker-schedule-form">
                     <input
@@ -71,27 +81,28 @@ const AddWorkerSchedule = () => {
                     placeholder="Pay Rate"
                     id="pay_rate"
                     name="pay_rate"
+                    step="0.01"
                     value={formData.pay_rate}
                     onChange={handleChange}
                     required
                     />
 
                     <input
-                    type="text"
+                    type="time"
                     placeholder="Start Time"
-                    id="start_time"
-                    name="start_time"
-                    value={formData.start_time}
+                    id="worker_start"
+                    name="worker_start"
+                    value={formData.worker_start}
                     onChange={handleChange}
                     required
                     />
 
                     <input
-                    type="text"
+                    type="time"
                     placeholder="End Time"
-                    id="end_time"
-                    name="end_time"
-                    value={formData.end_time}
+                    id="worker_end"
+                    name="worker_end"
+                    value={formData.worker_end}
                     onChange={handleChange}
                     required
                     />
@@ -107,7 +118,7 @@ const AddWorkerSchedule = () => {
                     />
 
                     <input
-                    type="text"
+                    type="date"
                     placeholder="Date"
                     id="schedule_date"
                     name="schedule_date"
