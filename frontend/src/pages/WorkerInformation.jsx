@@ -6,6 +6,7 @@ import './WorkerInformation.css';
 const WorkerInformation = () => {
   const [workers, setWorkers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 6;
 
   const getWorkerInformation = async () => {
@@ -21,14 +22,30 @@ const WorkerInformation = () => {
     getWorkerInformation();
   }, []);
 
+  const filteredWorkers = workers.filter(worker =>
+    Object.values(worker).some(value =>
+      String(value).toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentWorkers = workers.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(workers.length / itemsPerPage);
+  const currentWorkers = filteredWorkers.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredWorkers.length / itemsPerPage);
 
   return (
     <div className="container">
       <h2>Worker Information</h2>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
+        className="search-bar"
+      />
+
       <div className="table-container">
         <table className="worker-table">
           <thead>
@@ -42,7 +59,7 @@ const WorkerInformation = () => {
             </tr>
           </thead>
           <tbody>
-            {currentWorkers.map((worker) => (
+            {currentWorkers.map(worker => (
               <tr key={worker.worker_id}>
                 <td>{worker.worker_id}</td>
                 <td>{worker.full_name}</td>
@@ -55,21 +72,17 @@ const WorkerInformation = () => {
           </tbody>
         </table>
       </div>
+
       <div className="pagination-controls">
-        <button
-          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-          disabled={currentPage === 1}
-        >
+        <button onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))} disabled={currentPage === 1}>
           Previous
         </button>
         <span>Page {currentPage} of {totalPages}</span>
-        <button
-          onClick={() => setCurrentPage(prev => prev + 1)}
-          disabled={currentPage === totalPages}
-        >
+        <button onClick={() => setCurrentPage(prev => prev + 1)} disabled={currentPage === totalPages}>
           Next
         </button>
       </div>
+
       <Link to="/AddWorker" className="btn add-worker-btn">Add Worker</Link>
     </div>
   );
