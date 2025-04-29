@@ -9,6 +9,7 @@ import EventSchedule from './pages/EventSchedule';
 import Login from './pages/LoginPage';
 import AddWorker from './pages/AddWorker';
 import AddWorkerSchedule from './pages/AddWorkerSchedule';
+import AddVendorInformation from './pages/AddVendorInformation';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
@@ -66,6 +67,11 @@ function App() {
         <Route path="/AddWorkerSchedule" element={
           
           <AddWorkerSchedule />
+       
+        } />
+        <Route path="/AddVendorInformation" element={
+          
+          <AddVendorInformation />
        
         } />
       </Routes>

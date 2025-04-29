@@ -68,7 +68,7 @@ const VendorInformation = () => {
           Next
         </button>
       </div>
-      <Link to="/AddWorker" className="btn add-worker-btn">Add Worker</Link>
+      <Link to="/AddVendorInformation" className="btn add-worker-btn">Add Vendor</Link>
     </div>
   );
 };

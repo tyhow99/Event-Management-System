@@ -4,10 +4,10 @@ const pool = require("../db"); // Update the path based on your directory struct
 
 router.post("/", async (req, res) => {
     try {
-        const { vendor_name, contact_info, specialty } = req.body;
+        const {vendor_id, vendor_name, vendor_type, sections, manager_id} = req.body;
         const newVendor = await pool.query(
-            "INSERT INTO vendor_information (vendor_name, contact_info, specialty) VALUES ($1, $2, $3) RETURNING *",
-            [vendor_name, contact_info, specialty]
+            "INSERT INTO vendor_information (vendor_id, vendor_name, vendor_type, sections, manager_id) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+            [vendor_id, vendor_name, vendor_type, sections, manager_id]
         );
         res.json(newVendor.rows[0]);
     } catch (err) {
@@ -47,9 +47,9 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const { vendor_name, contact_info, specialty } = req.body;
+        const {vendor_id, vendor_name, vendor_type, sections, manager_id} = req.body;
         const updatedVendor = await pool.query(
-            "UPDATE vendor_information SET vendor_name = $1, contact_info = $2, specialty = $3 WHERE vendor_id = $4 RETURNING *",
+            "UPDATE vendor_information SET vendor_name = $2, vendor_type = $3, sections = $4, manager_id = $5 WHERE vendor_id = $1 RETURNING *",
             [vendor_name, contact_info, specialty, id]
         );
         if (updatedVendor.rows.length === 0) {
