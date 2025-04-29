@@ -4,7 +4,6 @@ import './AddVendorInformation.css';
 
 const AddVendorInformation = () => {
     const [formData, setFormData] = useState({
-        vendor_id: '',
         vendor_name: '',
         vendor_type: '',
         sections: '',
@@ -29,7 +28,6 @@ const AddVendorInformation = () => {
 
             //Reset after sucessful submit 
             setFormData({
-                vendor_id: '',
                 vendor_name: '',
                 vendor_type: '',
                 sections: '',
@@ -49,15 +47,6 @@ const AddVendorInformation = () => {
             {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Display error message */}
             <div className="form-container">
                 <form onSubmit={handleSubmit} className="vendor-form">
-                    <input
-                        type="number"
-                        placeholder="Vendor ID"
-                        id="vendor_id"
-                        name="vendor_id"
-                        value={formData.vendor_id}
-                        onChange={handleChange}
-                        required
-                    />
                     <input
                         type="text"
                         placeholder="Vendor Name"

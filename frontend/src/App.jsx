@@ -11,6 +11,7 @@ import AddWorker from "./pages/AddWorker";
 import AddWorkerSchedule from "./pages/AddWorkerSchedule";
 import UpdateWorker from "./pages/UpdateWorker";
 import AddVendorInformation from "./pages/AddVendorInformation";
+import AddEvent from "./pages/AddEvent";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 

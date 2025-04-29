@@ -6,6 +6,7 @@ import './WorkerSchedule.css';
 const WorkerSchedule = () => {
   const [schedules, setSchedule] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
   const itemsPerPage = 6;
 
   const getWorkerInformation = async () => {
@@ -21,14 +22,32 @@ const WorkerSchedule = () => {
     getWorkerInformation();
   }, []);
 
+  const filteredWorkers = schedules.filter(worker =>
+    Object.values(worker).some(value =>
+      String(value).toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentSchedules = schedules.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(schedules.length / itemsPerPage);
+  const currentSchedules = filteredWorkers.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredWorkers.length / itemsPerPage);
 
   return (
+
+
     <div className="container">
       <h2>Worker Schedule Information</h2>
+
+      {/* Search Bar */}
+      <input
+        type="text"
+        placeholder="Search"
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
+        className="search-bar"
+      />
+
       <div className="table-container">
         <table className="schedule-table">
           <thead>
