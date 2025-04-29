@@ -41,7 +41,7 @@ const EventSchedule = () =>
                             <th>Event Start</th>
                             <th>Event End</th>
                             <th>Event Date</th>
-                            <th>organize</th>
+                            <th>Organizer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,6 +73,7 @@ const EventSchedule = () =>
           Next
         </button>
         </div>
+        <Link to="/AddEvent" className="btn add-worker-btn">Add Event</Link>
     </div>
     );
 };
