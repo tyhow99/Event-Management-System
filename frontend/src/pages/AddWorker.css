@@ -43,3 +43,25 @@
   color: black;
   border: 1px solid #ccc;
 }
+.delete-worker-btn {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-worker-btn:hover {
+  background-color: #c0392b;
+}
+.form-row {
+  display: flex;
+  align-items: center;
+  color: black;
+}
+.form-row label {
+}
+.form-row input {
+}

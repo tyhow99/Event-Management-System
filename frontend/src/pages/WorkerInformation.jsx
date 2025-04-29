@@ -62,6 +62,14 @@ const WorkerInformation = () => {
                     Update
                   </Link>
                 </td>
+                <td>
+                  <button
+                    className="delete-worker-btn"
+                    onClick={() => handleDelete(worker.worker_id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
