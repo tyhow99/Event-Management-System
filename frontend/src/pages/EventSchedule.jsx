@@ -8,6 +8,7 @@ const EventSchedule = () =>
 {
     const [events, setEvents] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [searchTerm, setSearchTerm] = useState('');
     const itemsPerPage = 6;
 
     const getEventSchedule = async () => {
@@ -24,14 +25,30 @@ const EventSchedule = () =>
       }, []);
 
 
+      const filteredWorkers = events.filter(worker =>
+        Object.values(worker).some(value =>
+          String(value).toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
+
       const indexOfLastItem = currentPage * itemsPerPage;
       const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-      const currentEvents = events.slice(indexOfFirstItem, indexOfLastItem);
-      const totalPages = Math.ceil(events.length / itemsPerPage);
+      const currentEvents = filteredWorkers.slice(indexOfFirstItem, indexOfLastItem);
+      const totalPages = Math.ceil(filteredWorkers.length / itemsPerPage);
 
     return(
         <div className="container">
             <h2>Event Schedule</h2>
+
+            {/* Search Bar */}
+            <input
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={e => setSearchTerm(e.target.value)}
+                className="search-bar"
+            />
+
             <div className="table-container">
                 <table className="event-table">
                     <thead>
