@@ -24,6 +24,16 @@ const EventSchedule = () =>
         getEventSchedule();
       }, []);
 
+    const handleDelete = async (eventId) => {
+      if (window.confirm("Are you sure you want to delete this event?")) {
+        try {
+          await axios.delete(`http://localhost:5001/event_schedule/${eventId}`);
+          getEventSchedule(); // Refresh event list
+        } catch (error) {
+          console.error("Error deleting event:", error);
+        }
+      }
+    };
 
       const filteredWorkers = events.filter(worker =>
         Object.values(worker).some(value =>
@@ -59,6 +69,8 @@ const EventSchedule = () =>
                             <th>Event End</th>
                             <th>Event Date</th>
                             <th>Organizer</th>
+                            <th>Actions</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,6 +82,22 @@ const EventSchedule = () =>
                                 <td>{event.event_end}</td>
                                 <td>{new Date(event.event_date).toLocaleDateString()}</td>
                                 <td>{event.organizer}</td>
+                                <td>
+                                <Link
+                                  to={`/UpdateEvent/${event.event_id}`}
+                                  className="update-event-btn"
+                                >
+                                Update
+                                </Link>
+                                </td>
+                                <td>
+                                <button
+                                  className="delete-event-btn"
+                                  onClick={() => handleDelete(event.event_id)}
+                                >
+                                Delete
+                                </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

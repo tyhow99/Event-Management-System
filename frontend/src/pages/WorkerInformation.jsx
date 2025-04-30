@@ -30,6 +30,18 @@ const WorkerInformation = () => {
     )
   );
 
+  const handleDelete = async (workerId) => {
+    if (window.confirm("Are you sure you want to delete this worker?")) {
+      try {
+        await axios.delete(`http://localhost:5001/employee_information/${workerId}`);
+        // Refresh the worker list after deletion
+        getWorkerInformation();
+      } catch (error) {
+        console.error("Error deleting worker:", error);
+      }
+    }
+  };
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentWorkers = filteredWorkers.slice(

@@ -59,6 +59,8 @@ const WorkerSchedule = () => {
               <th>Start Time</th>
               <th>End Time</th>
               <th>Section</th>
+              <th>Actions</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

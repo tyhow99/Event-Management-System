@@ -22,6 +22,17 @@ const VendorInformation = () => {
     getVendorInformation();
   }, []);
 
+  const handleDelete = async (vendorId) => {
+    if (window.confirm("Are you sure you want to delete this vendor?")) {
+      try {
+        await axios.delete(`http://localhost:5001/vendor_information/${vendorId}`);
+        getVendorInformation(); // Refresh list after deletion
+      } catch (error) {
+        console.error("Error deleting vendor:", error);
+      }
+    }
+  };
+
   const filteredWorkers = vendors.filter(worker =>
     Object.values(worker).some(value =>
       String(value).toLowerCase().includes(searchTerm.toLowerCase())
@@ -55,6 +66,8 @@ const VendorInformation = () => {
               <th>Type</th>
               <th>Sections</th>
               <th>Manager ID</th>
+              <th>Actions</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -65,6 +78,22 @@ const VendorInformation = () => {
                 <td>{vendor.vendor_type}</td>
                 <td>{vendor.sections}</td>
                 <td>{vendor.manager_id}</td>
+                <td>
+                  <Link
+                    to={`/UpdateVendor/${vendor.vendor_id}`}
+                    className="update-vendor-btn"
+                  >
+                    Update
+                  </Link>
+                </td>
+                <td>
+                  <button
+                    className="delete-vendor-btn"
+                    onClick={() => handleDelete(vendor.vendor_id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
