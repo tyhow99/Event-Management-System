@@ -85,6 +85,8 @@ function App() {
         />
         <Route path="/AddWorker" element={<AddWorker />} />
         <Route path="/AddWorkerSchedule" element={<AddWorkerSchedule />} />
+        <Route path="/AddVendorInformation" element={<AddVendorInformation />} />
+        <Route path="/AddEvent" element={<AddEvent />} />
         <Route path="/UpdateWorker/:worker_id" element={<UpdateWorker />} />
       </Routes>
       {isAuthenticated && <Footer />}
