@@ -41,7 +41,7 @@ const WorkerSchedule = () => {
     })
   );
 
-  const handleDelete = async (shceduleId) => {
+  const handleDelete = async (scheduleId) => {
     if (window.confirm("Are you sure you want to delete this schedule?")) {
       try {
         await axios.delete(`http://localhost:5001/worker_schedule/${scheduleId}`);
