@@ -14,13 +14,18 @@ const VendorInformation = () => {
       const response = await axios.get('http://localhost:5001/vendor_information');
       setVendors(response.data);
     } catch (error) {
-      console.error('Error fetching worker information:', error);
+      console.error('Error fetching vendor information:', error);
     }
   };
 
   useEffect(() => {
     getVendorInformation();
   }, []);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
 
   const handleDelete = async (vendorId) => {
     if (window.confirm("Are you sure you want to delete this vendor?")) {
@@ -33,16 +38,25 @@ const VendorInformation = () => {
     }
   };
 
-  const filteredWorkers = vendors.filter(worker =>
-    Object.values(worker).some(value =>
-      String(value).toLowerCase().includes(searchTerm.toLowerCase())
-    )
+  const filteredVendors = vendors.filter(vendor =>
+    Object.values(vendor).some(value => {
+      let stringValue;
+
+      if (vendor.event_date === value) {
+        const date = new Date(value);
+        stringValue = date.toLocaleDateString(); // Converts to "M/D/YYYY"
+      } else {
+        stringValue = String(value);
+      }
+
+      return stringValue.toLowerCase().includes(searchTerm.toLowerCase());
+    })
   );
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentVendors = filteredWorkers.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(filteredWorkers.length / itemsPerPage);
+  const currentVendors = filteredVendors.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredVendors.length / itemsPerPage);
 
   return (
     <div className="container">
@@ -114,7 +128,7 @@ const VendorInformation = () => {
           Next
         </button>
       </div>
-      <Link to="/AddVendorInformation" className="btn add-worker-btn">Add Vendor</Link>
+      <Link to="/AddVendorInformation" className="btn add-vendor-btn">Add Vendor</Link>
     </div>
   );
 };

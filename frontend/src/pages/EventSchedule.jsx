@@ -21,8 +21,12 @@ const EventSchedule = () =>
     }
 
     useEffect(() => {
-        getEventSchedule();
-      }, []);
+      getEventSchedule();
+    }, []);
+
+    useEffect(() => {
+      setCurrentPage(1);
+    }, [searchTerm]);
 
     const handleDelete = async (eventId) => {
       if (window.confirm("Are you sure you want to delete this event?")) {
@@ -35,11 +39,21 @@ const EventSchedule = () =>
       }
     };
 
-      const filteredWorkers = events.filter(worker =>
-        Object.values(worker).some(value =>
-          String(value).toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      );
+    const filteredWorkers = events.filter(worker =>
+      Object.values(worker).some(value => {
+        let stringValue;
+
+        if (worker.event_date === value) {
+          const date = new Date(value);
+          stringValue = date.toLocaleDateString(); // Converts to "M/D/YYYY"
+        } else {
+          stringValue = String(value);
+        }
+
+        return stringValue.toLowerCase().includes(searchTerm.toLowerCase());
+      })
+    );
+
 
       const indexOfLastItem = currentPage * itemsPerPage;
       const indexOfFirstItem = indexOfLastItem - itemsPerPage;
