@@ -41,6 +41,17 @@ const WorkerSchedule = () => {
     })
   );
 
+  const handleDelete = async (shceduleId) => {
+    if (window.confirm("Are you sure you want to delete this schedule?")) {
+      try {
+        await axios.delete(`http://localhost:5001/worker_schedule/${scheduleId}`);
+        getWorkerInformation(); // Refresh list after deletion
+      } catch (error) {
+        console.error("Error deleting schedule:", error);
+      }
+    }
+  };
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentSchedules = filteredWorkers.slice(indexOfFirstItem, indexOfLastItem);
@@ -86,6 +97,22 @@ const WorkerSchedule = () => {
                 <td>{schedule.worker_start}</td>
                 <td>{schedule.worker_end}</td>
                 <td>{schedule.section}</td>
+                <td>
+                  <Link
+                    to={`/UpdateSchedule/${schedule.worker_id}`}
+                    className="update-schedule-btn"
+                  >
+                    Update
+                  </Link>
+                </td>
+                <td>
+                  <button
+                    className="delete-schedule-btn"
+                    onClick={() => handleDelete(schedule.worker_id)}
+                  >
+                    Delete
+                  </button>
+                  </td>
               </tr>
             ))}
           </tbody>
