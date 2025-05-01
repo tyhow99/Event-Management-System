@@ -10,7 +10,10 @@ import Login from "./pages/LoginPage";
 import AddWorker from "./pages/AddWorker";
 import AddWorkerSchedule from "./pages/AddWorkerSchedule";
 import UpdateWorker from "./pages/UpdateWorker";
+import UpdateSchedule from "./pages/UpdateSchedule";
 import AddVendorInformation from "./pages/AddVendorInformation";
+import UpdateVendor from "./pages/UpdateVendor";
+import UpdateEvent from "./pages/UpdateEvent";
 import AddEvent from "./pages/AddEvent";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -85,9 +88,15 @@ function App() {
         />
         <Route path="/AddWorker" element={<AddWorker />} />
         <Route path="/AddWorkerSchedule" element={<AddWorkerSchedule />} />
-        <Route path="/AddVendorInformation" element={<AddVendorInformation />} />
+        <Route
+          path="/AddVendorInformation"
+          element={<AddVendorInformation />}
+        />
         <Route path="/AddEvent" element={<AddEvent />} />
         <Route path="/UpdateWorker/:worker_id" element={<UpdateWorker />} />
+        <Route path="/UpdateSchedule/:worker_id" element={<UpdateSchedule />} />
+        <Route path="/UpdateVendor/:vendor_id" element={<UpdateVendor />} />
+        <Route path="/UpdateEvent/:event_id" element={<UpdateEvent />} />
       </Routes>
       {isAuthenticated && <Footer />}
     </BrowserRouter>

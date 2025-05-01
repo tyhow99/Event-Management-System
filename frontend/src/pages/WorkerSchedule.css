@@ -1,66 +1,67 @@
 .container {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  .table-container {
-    margin: 1rem 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
+.table-container {
+  margin: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .schedule-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-  }
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  color: black;
+}
 
-  .schedule-table th,
-  .schedule-table td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
-  }
+.schedule-table th,
+.schedule-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
 
-  .schedule-table th {
-    background-color: #1a237e;
-    color: white;
-    position: sticky;
-    top: 0;
-  }
+.schedule-table th {
+  background-color: #1a237e;
+  color: white;
+  position: sticky;
+  top: 0;
+}
 
-  .schedule-table tr:hover {
-    background-color: #f5f5f5;
-  }
+.schedule-table tr:hover {
+  background-color: #f5f5f5;
+}
 
-  .pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 1rem;
-  }
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
 
-  .pagination-controls button {
-    padding: 8px 16px;
-    background-color: #1a237e;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
+.pagination-controls button {
+  padding: 8px 16px;
+  background-color: #1a237e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  .pagination-controls button:hover:not(:disabled) {
-    background-color: #303f9f;
-  }
+.pagination-controls button:hover:not(:disabled) {
+  background-color: #303f9f;
+}
 
-  .pagination-controls button:disabled {
-    background-color: #7986cb;
-    cursor: not-allowed;
-  }
+.pagination-controls button:disabled {
+  background-color: #7986cb;
+  cursor: not-allowed;
+}
 
-  .pagination-controls span {
-    font-weight: 500;
-    color: #333;
-  }
+.pagination-controls span {
+  font-weight: 500;
+  color: #333;
+}

@@ -1,20 +1,22 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import './VendorInformation.css';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import "./VendorInformation.css";
 
 const VendorInformation = () => {
   const [vendors, setVendors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 6;
 
   const getVendorInformation = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/vendor_information');
+      const response = await axios.get(
+        "http://localhost:5001/vendor_information"
+      );
       setVendors(response.data);
     } catch (error) {
-      console.error('Error fetching vendor information:', error);
+      console.error("Error fetching vendor information:", error);
     }
   };
 
@@ -26,11 +28,12 @@ const VendorInformation = () => {
     setCurrentPage(1);
   }, [searchTerm]);
 
-
   const handleDelete = async (vendorId) => {
     if (window.confirm("Are you sure you want to delete this vendor?")) {
       try {
-        await axios.delete(`http://localhost:5001/vendor_information/${vendorId}`);
+        await axios.delete(
+          `http://localhost:5001/vendor_information/${vendorId}`
+        );
         getVendorInformation(); // Refresh list after deletion
       } catch (error) {
         console.error("Error deleting vendor:", error);
@@ -38,8 +41,8 @@ const VendorInformation = () => {
     }
   };
 
-  const filteredVendors = vendors.filter(vendor =>
-    Object.values(vendor).some(value => {
+  const filteredVendors = vendors.filter((vendor) =>
+    Object.values(vendor).some((value) => {
       let stringValue;
 
       if (vendor.event_date === value) {
@@ -55,7 +58,10 @@ const VendorInformation = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentVendors = filteredVendors.slice(indexOfFirstItem, indexOfLastItem);
+  const currentVendors = filteredVendors.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
   const totalPages = Math.ceil(filteredVendors.length / itemsPerPage);
 
   return (
@@ -67,7 +73,7 @@ const VendorInformation = () => {
         type="text"
         placeholder="Search"
         value={searchTerm}
-        onChange={e => setSearchTerm(e.target.value)}
+        onChange={(e) => setSearchTerm(e.target.value)}
         className="search-bar"
       />
 
@@ -115,20 +121,24 @@ const VendorInformation = () => {
       </div>
       <div className="pagination-controls">
         <button
-          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+          onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
           disabled={currentPage === 1}
         >
           Previous
         </button>
-        <span>Page {currentPage} of {totalPages}</span>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
         <button
-          onClick={() => setCurrentPage(prev => prev + 1)}
+          onClick={() => setCurrentPage((prev) => prev + 1)}
           disabled={currentPage === totalPages}
         >
           Next
         </button>
       </div>
-      <Link to="/AddVendorInformation" className="btn add-vendor-btn">Add Vendor</Link>
+      <Link to="/AddVendorInformation" className="btn add-vendor-btn">
+        Add Vendor
+      </Link>
     </div>
   );
 };

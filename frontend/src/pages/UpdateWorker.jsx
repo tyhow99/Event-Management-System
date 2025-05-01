@@ -74,39 +74,30 @@ const UpdateWorker = () => {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="form-container">
         <form onSubmit={handleSubmit} className="worker-form">
-          <div className="form-row">
-            <label htmlFor="full_name">Full Name</label>
-            <input
-              type="text"
-              placeholder="Full Name"
-              id="full_name"
-              name="full_name"
-              value={formData.full_name}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="phone_number">Phone Number</label>
-            <input
-              type="text"
-              placeholder="Phone Number"
-              id="phone_number"
-              name="phone_number"
-              value={formData.phone_number}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form-row">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              placeholder="Email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
+          <input
+            type="text"
+            placeholder="Full Name"
+            id="full_name"
+            name="full_name"
+            value={formData.full_name}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            placeholder="Phone Number"
+            id="phone_number"
+            name="phone_number"
+            value={formData.phone_number}
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
           <input
             type="date"
             placeholder="Date Of Birth"
