@@ -61,6 +61,21 @@
   cursor: not-allowed;
 }
 
+.delete-worker-btn {
+  background-color: #3b82f6; /* Blue */
+  color: white;
+  padding: 6px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.delete-worker-btn:hover {
+  background-color: #2563eb; /* Darker blue on hover */
+}
+
 .pagination-controls span {
   font-weight: 500;
   color: #333;
