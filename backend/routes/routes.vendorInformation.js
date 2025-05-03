@@ -50,7 +50,8 @@ router.put("/:id", async (req, res) => {
         const {vendor_name, vendor_type, sections, manager_id} = req.body;
         const updatedVendor = await pool.query(
             "UPDATE vendor_information SET vendor_name = $2, vendor_type = $3, sections = $4, manager_id = $5 WHERE vendor_id = $1 RETURNING *",
-            [vendor_name, vendor_type, sections, manager_id, id]
+            [id, vendor_name, vendor_type, sections, manager_id]
+
         );
         if (updatedVendor.rows.length === 0) {
             return res.status(404).json({ error: "Vendor not found" });
