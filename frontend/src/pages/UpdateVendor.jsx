@@ -28,7 +28,7 @@ const UpdateVendor = () => {
           vendor_name: vendorData.vendor_name || "",
           vendor_type: vendorData.vendor_type || "",
           sections: vendorData.sections || "",
-          manager_id: vendorData.manager_id || "",
+          manager_id: vendorData.manager_id || "", // Ensuring manager_id is initialized properly
         });
       } catch (error) {
         console.error("Error fetching vendor data:", error);
@@ -40,15 +40,31 @@ const UpdateVendor = () => {
   }, [vendor_id]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Validate manager_id to allow only numbers
+    if (name === "manager_id" && isNaN(value)) {
+      setErrorMessage("Manager ID must be a number.");
+      return;
+    }
+
+    setFormData({ ...formData, [name]: value });
+    setErrorMessage(""); // Clear any errors on valid input
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Ensure manager_id is a valid number before sending request
+    if (isNaN(parseInt(formData.manager_id, 10))) {
+      setErrorMessage("Manager ID must be a valid number.");
+      return;
+    }
+
     try {
       await axios.put(
         `http://localhost:5001/vendor_information/${vendor_id}`,
-        formData
+        { ...formData, manager_id: parseInt(formData.manager_id, 10) } // Convert manager_id before sending
       );
       setSuccessMessage("Vendor updated successfully!");
       setErrorMessage("");
@@ -95,7 +111,7 @@ const UpdateVendor = () => {
             onChange={handleChange}
           />
           <input
-            type="text"
+            type="number" // Restricting input type to numbers
             placeholder="Manager ID"
             id="manager_id"
             name="manager_id"
